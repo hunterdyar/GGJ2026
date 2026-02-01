@@ -5,16 +5,21 @@ namespace Peggle
 {
 	public class Enemy : MonoBehaviour
 	{
-		public RoundData RoundData;
+		public GameManager GameManager;
+
+		private void Awake()
+		{
+			GameManager = GameObject.FindFirstObjectByType<GameManager>();
+		}
 
 		void Start()
 		{
-			RoundData.RegisterEnemy(this);
+			GameManager.RegisterEnemy(this);
 		}
 
 		public void Kill()
 		{
-			RoundData.ClearEnemy(this);
+			GameManager.ClearEnemy(this);
 			GetComponent<SpriteRenderer>().enabled = false;
 			GetComponent<Collider2D>().enabled = false;
 		}

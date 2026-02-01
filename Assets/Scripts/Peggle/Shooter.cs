@@ -1,3 +1,4 @@
+using System;
 using Peggle;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,17 +6,35 @@ using UnityEngine.InputSystem;
 public class Shooter : MonoBehaviour
 {
     [Header("Asset References")]
-    public RoundData RoundData;
     public GameObject BulletPrefab;
-    [Header("Prefab Config")] public Transform ShotTransform; 
+    [Header("Config")] public Transform ShotTransform;
+    public float _shootForce = 40;
+    private int _shotsLeft;
+    
+
+    private void OnEnable()
+    {
+        GameManager.OnNewRound += OnNewRound;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnNewRound -= OnNewRound;
+    }
+
+    private void OnNewRound(GameManager manager, int obj)
+    {
+        _shotsLeft = manager.gameSettings.ShotsPerRound;
+    }
+
     public void TryShoot()
     {
-        if (RoundData.ShotsLeft > 0)
+        if (_shotsLeft > 0)
         {
             var bullet = Instantiate(BulletPrefab, ShotTransform.position, ShotTransform.rotation);
             var rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(ShotTransform.up*RoundData.ShootForce, ForceMode2D.Impulse);
-            RoundData.ShotsLeft--;
+            rb.AddForce(ShotTransform.up*_shootForce, ForceMode2D.Impulse);
+            _shotsLeft--;
         }
     }
     
