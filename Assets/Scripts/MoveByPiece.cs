@@ -2,6 +2,7 @@
 using Board.Input;
 using UnityEngine;
 
+
 public class MoveByPiece : MonoBehaviour
 {
 	private BoardGameInput _boardGameInput;
@@ -11,6 +12,7 @@ public class MoveByPiece : MonoBehaviour
 	public float zPos;
 	public Vector3 PositionCalibrate = new Vector3();
 	public BoxCollider2D ValidArea;
+	public TouchPhase TouchPhase = TouchPhase.None;
 	private void Awake()
 	{
 		_boardGameInput = GameObject.FindFirstObjectByType<BoardGameInput>();
@@ -25,9 +27,11 @@ public class MoveByPiece : MonoBehaviour
 		_boardGameInput.RegisterPieceTransform(this, glyphID);
 		_camera = Camera.main;
 	}
-
-	public void ProcessInput(BoardContact contact)
+	public void ProcessInput(BoardContact contact, TouchPhase phase)
 	{
+		TouchPhase = phase;
+
+		//call process functions.
 		switch (contact.phase)
 		{
 			case BoardContactPhase.Began:
