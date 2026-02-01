@@ -25,7 +25,8 @@ namespace Peggle
 		private void Update()
 		{
 			float f = ChargeScaleCurve.Evaluate(_animShotCharge);
-			ChargeShotTransform.localScale = Vector3.one * f;
+			float scale = Mathf.Lerp(0.4f, 1f, f);
+			ChargeShotTransform.localScale = Vector3.one * scale;
 			if (_animShotCharge >= 1)
 			{
 				_spriteRenderer.color = TotallyChargedColor;

@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
             {
                 StartNewRound(_loadedRound + 1);
             }
+
+            else
+            {
+                StartNewRound(0);
+            }
         }
     }
 }
