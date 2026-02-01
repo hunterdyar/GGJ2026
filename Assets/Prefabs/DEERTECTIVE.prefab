@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8006da8ad124a81865a78813f2f3148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveByPiece
-  glyphID: 5
+  glyphID: 7
   AngleCalibrate: 180
   zPos: 0
   PositionCalibrate: {x: 0, y: 0, z: 0}

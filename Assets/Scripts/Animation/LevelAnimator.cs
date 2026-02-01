@@ -2,8 +2,14 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
+public enum GameDirection
+{
+	VerticalUp,
+	HorizontalRight
+}
 public class LevelAnimator : UnityEngine.MonoBehaviour
 {
+	public GameDirection direction = GameDirection.HorizontalRight;
 	public AnimationCurve Ease = new AnimationCurve();
 	public float TransitionSpeed = 7;
 	
@@ -14,9 +20,18 @@ public class LevelAnimator : UnityEngine.MonoBehaviour
 
 	private IEnumerator AnimateLevel([CanBeNull] Transform old, Transform newLevel)
 	{
-		Vector3 topCenterOfScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2f, Screen.height));
+		Vector3 rightCenterOfScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width , Screen.height/2f));
+		Vector3 topCenterOfScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width , Screen.height/2f));
 		float gapBetweenLevels = topCenterOfScreen.y*2;
-		Vector3 newStart = newLevel.position+Vector3.up*gapBetweenLevels;
+		Vector3 dir = Vector3.up;
+
+		if (direction == GameDirection.HorizontalRight)
+		{
+			gapBetweenLevels = rightCenterOfScreen.x*2; 
+			dir = Vector3.right;
+		}
+		
+		Vector3 newStart = newLevel.position+dir*gapBetweenLevels;
 		Vector3 newEnd = Vector3.zero;//should be 0,0
 		
 		//old
@@ -27,7 +42,7 @@ public class LevelAnimator : UnityEngine.MonoBehaviour
 		{
 			hasHold = true;
 			oldStart = old.position; //should be 0,0
-			oldEnd = old.position + Vector3.down * gapBetweenLevels;
+			oldEnd = old.position -dir * gapBetweenLevels;
 		}
 
 		float timeToMove = gapBetweenLevels/TransitionSpeed;

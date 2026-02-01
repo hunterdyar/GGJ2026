@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dccf3b5ffc49bc9128384cc69b4657, type: 3}
   m_Name: Test Game Data
   m_EditorClassIdentifier: Assembly-CSharp::Peggle.RoundData
-  ShotsLeft: 100000
-  ShotsPerRound: 100000
+  ShotsPerRound: 1000000
   Levels:
   - {fileID: 6299189014180040882, guid: b5951db4c80fd764a970ae63761ffdef, type: 3}
   - {fileID: 6299189014180040882, guid: 581ea4715b9ad7942a200fd2a7c9aa20, type: 3}
