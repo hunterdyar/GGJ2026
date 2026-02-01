@@ -10,6 +10,7 @@ public class MoveByPiece : MonoBehaviour
 	public float AngleCalibrate = 0;
 	public float zPos;
 	public Vector3 PositionCalibrate = new Vector3();
+	public BoxCollider2D ValidArea;
 	private void Awake()
 	{
 		_boardGameInput = GameObject.FindFirstObjectByType<BoardGameInput>();
@@ -33,6 +34,13 @@ public class MoveByPiece : MonoBehaviour
 			case BoardContactPhase.Moved:
 			case BoardContactPhase.Ended:
 				var pos = GetWorldPosition(contact.screenPosition, contact.orientation);
+				if (ValidArea != null)
+				{
+					if (!ValidArea.OverlapPoint(pos.pos))
+					{
+						pos.pos = ValidArea.ClosestPoint(pos.pos);
+					}
+				}
 				transform.position = pos.pos;
 				transform.rotation = pos.rot;
 				break;

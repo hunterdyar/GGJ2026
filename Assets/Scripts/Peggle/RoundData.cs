@@ -9,7 +9,7 @@ namespace Peggle
 		[SerializeField] private int ShotsPerRound;
 		public float ShootForce = 40;
 
-		void StartNewRound(int roundNumber)
+		public void StartNewRound(int roundNumber)
 		{
 			ShotsLeft = ShotsPerRound;
 		}

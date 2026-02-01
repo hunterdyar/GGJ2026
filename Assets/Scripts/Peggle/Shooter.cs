@@ -13,8 +13,8 @@ public class Shooter : MonoBehaviour
         if (RoundData.ShotsLeft > 0)
         {
             var bullet = Instantiate(BulletPrefab, ShotTransform.position, ShotTransform.rotation);
-            var rb = bullet.GetComponent<Rigidbody>();
-            rb.AddForce(ShotTransform.up*RoundData.ShootForce, ForceMode.Impulse);
+            var rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(ShotTransform.up*RoundData.ShootForce, ForceMode2D.Impulse);
             RoundData.ShotsLeft--;
         }
     }
