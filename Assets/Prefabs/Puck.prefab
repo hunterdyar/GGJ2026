@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4511178862127942872}
   - component: {fileID: 5298446912122287471}
   - component: {fileID: 236797137764977859}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Puck
-  m_TagString: Untagged
+  m_TagString: Puck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

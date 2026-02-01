@@ -284,9 +284,9 @@
       "url": "https://packages.unity.com"
     },
     "fun.board": {
-      "version": "file:C:/Users/bloops/Downloads/fun.board-3.2.1.tgz",
+      "version": "file:fun.board",
       "depth": 0,
-      "source": "local-tarball",
+      "source": "embedded",
       "dependencies": {
         "com.unity.inputsystem": "1.7.0"
       }
