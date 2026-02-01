@@ -385,7 +385,7 @@ SpriteRenderer:
   m_SortingOrder: -500
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: b185eb2b7e636425aa63d7201b66f7e8, type: 3}
-  m_Color: {r: 0.18867922, g: 0.17532927, b: 0.17532927, a: 1}
+  m_Color: {r: 0.18867922, g: 0.17532927, b: 0.17532927, a: 0.2784314}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -595,6 +595,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2082376276751044986, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
+      propertyPath: TotallyChargedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2082376276751044986, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
+      propertyPath: TotallyChargedColor.g
+      value: 0.4760489
+      objectReference: {fileID: 0}
+    - target: {fileID: 2082376276751044986, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
+      propertyPath: TotallyChargedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4544666985454506811, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.88
@@ -634,6 +646,10 @@ PrefabInstance:
     - target: {fileID: 4544666985454506811, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544666985454506811, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5334773344568721830, guid: 1bb9e2f08290fb944b9cf533216551b6, type: 3}
       propertyPath: ValidArea

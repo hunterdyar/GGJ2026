@@ -9,9 +9,11 @@ namespace Peggle
 	{
 		private GameManager GameManager;
 		private Animator animator;
+		private CircleCollider2D collider;
 		private bool isDead = false;
 		private void Awake()
 		{
+			collider = GetComponent<CircleCollider2D>();
 			animator = GetComponent<Animator>();
 			GameManager = GameObject.FindFirstObjectByType<GameManager>();
 		}
@@ -32,12 +34,15 @@ namespace Peggle
 			isDead = true;
 			animator.SetTrigger("Die");
 			GameManager.ClearEnemy(this);
-			GetComponent<SpriteRenderer>().enabled = false;
-			GetComponent<Collider2D>().enabled = false;
+			collider.enabled = false;
 		}
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
+			if (isDead)
+			{
+				return;
+			}
 			if (other.gameObject.CompareTag("Puck"))
 			{
 				Kill();
