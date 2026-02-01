@@ -14,10 +14,13 @@ namespace Peggle
 		public float ShootForce = 40;
 		private List<Enemy> _enemies = new List<Enemy>();
 
+		private int _loadedRound = -1;
 		private Transform _currentLevel;
+		private LevelAnimator _levelAnimator;
 		//called in awake
 		public void StartNewRound(int roundNumber)
 		{
+			_loadedRound = roundNumber;
 			ShotsLeft = ShotsPerRound;
 			_enemies.Clear();
 			
@@ -25,14 +28,42 @@ namespace Peggle
 			if (roundNumber >= 0 && roundNumber < Levels.Length)
 			{
 				var level = Levels[roundNumber];
-				var l = Instantiate(level, level.transform.position, level.transform.rotation);
-				_currentLevel = l.transform;
+				var newLevel = Instantiate(level, level.transform.position, level.transform.rotation);
+				var a = LazyGetLevelAnimator();
+				a.AnimateLevelTransition(_currentLevel, newLevel.transform);
+				//then update.
+				_currentLevel = newLevel.transform;
 			}
 			else
 			{
 				Debug.LogError($"Can't Load Level {roundNumber}");
 			}
+			
 			//start slide down animation
+		}
+
+		private LevelAnimator LazyGetLevelAnimator()
+		{
+			if (_levelAnimator != null)
+			{
+				return _levelAnimator;
+			}
+			else
+			{
+				_levelAnimator = GameObject.FindFirstObjectByType<LevelAnimator>();
+				if (_levelAnimator != null)
+				{
+					return _levelAnimator;
+				}
+				else
+				{
+					var l = new GameObject();
+					l.name = "ad hoc level animator";
+					_levelAnimator = l.AddComponent<LevelAnimator>();
+					return _levelAnimator;
+				}
+			}
+			
 		}
 
 		/// <summary>
@@ -56,6 +87,10 @@ namespace Peggle
 			if (_enemies.Count == 0)
 			{
 				Debug.Log("Last Enemy Cleared!");
+				if (_loadedRound < Levels.Length - 1)
+				{
+					StartNewRound(_loadedRound + 1);
+				}
 			}
 		}
 	}

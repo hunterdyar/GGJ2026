@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelAnimator : UnityEngine.MonoBehaviour
 {
-	public AnimationCurve Ease;
-	public float TransitionSpeed;
+	public AnimationCurve Ease = new AnimationCurve();
+	public float TransitionSpeed = 7;
 	
 	public void AnimateLevelTransition(Transform old, Transform level)
 	{
@@ -14,7 +14,7 @@ public class LevelAnimator : UnityEngine.MonoBehaviour
 
 	private IEnumerator AnimateLevel([CanBeNull] Transform old, Transform newLevel)
 	{
-		Vector3 topCenterOfScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2f, 0));
+		Vector3 topCenterOfScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2f, Screen.height));
 		float gapBetweenLevels = topCenterOfScreen.y*2;
 		Vector3 newStart = newLevel.position+Vector3.up*gapBetweenLevels;
 		Vector3 newEnd = Vector3.zero;//should be 0,0
@@ -34,10 +34,11 @@ public class LevelAnimator : UnityEngine.MonoBehaviour
 		float t = 0;
 		while (t < 1)
 		{
-			newLevel.position = Vector3.Lerp(newStart, newEnd, t);
+			float f = Ease.Evaluate(t);
+			newLevel.position = Vector3.Lerp(newStart, newEnd, f);
 			if (hasHold)
 			{
-				old.position = Vector3.Lerp(oldStart, oldEnd, t);
+				old.position = Vector3.Lerp(oldStart, oldEnd, f);
 			}
 
 			t += Time.deltaTime / timeToMove;
